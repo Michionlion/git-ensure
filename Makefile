@@ -10,13 +10,16 @@ CFLAGS  = -Wall
 TARGET = ensure
 SOURCE = src/ensure.c
 
-run:
-	./$(TARGET)
-
 all: $(TARGET)
 
 $(TARGET): $(SOURCE)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCE)
+
+test: $(TARGET)
+	$(warning No tests currently defined)
+
+run:
+	./$(TARGET)
 
 clean:
 	$(RM) $(TARGET)
