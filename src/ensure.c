@@ -8,15 +8,15 @@
 void doIO(char* name);
 void doEnsure(char* repo);
 
+int error = 0;
+
 int main(int argc, char** argv) {
     if(argc <= 1) {
-        fprintf(stderr, "Useage: ensure [filename]\n");
-        return 0;
+        doIO(".");
+    } else {
+        doIO(argv[1]);
     }
-
-    doIO(argv[1]);
-
-    return 0;
+    return error;
 }
 
 void doIO(char* name) {
@@ -26,6 +26,7 @@ void doIO(char* name) {
     if(parent==NULL) {
         if(errno==20) return; //expected error not a directory
         fprintf(stderr, "Error: %d (%s)", errno, strerror(errno));
+        error = 20;
         return;
     }
     struct dirent* dir;
